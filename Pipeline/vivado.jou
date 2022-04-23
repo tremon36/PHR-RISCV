@@ -1,0 +1,18 @@
+#-----------------------------------------------------------
+# Vivado v2021.2 (64-bit)
+# SW Build 3367213 on Tue Oct 19 02:48:09 MDT 2021
+# IP Build 3369179 on Thu Oct 21 08:25:16 MDT 2021
+# Start of session at: Sat Apr 23 12:10:00 2022
+# Process ID: 20320
+# Current directory: C:/Users/carle/OneDrive/Escritorio/PHR-RISCV/Pipeline
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent15496 C:\Users\carle\OneDrive\Escritorio\PHR-RISCV\Pipeline\Pipeline.xpr
+# Log file: C:/Users/carle/OneDrive/Escritorio/PHR-RISCV/Pipeline/vivado.log
+# Journal file: C:/Users/carle/OneDrive/Escritorio/PHR-RISCV/Pipeline\vivado.jou
+# Running On: DESKTOP-L6CAL2C, OS: Windows, CPU Frequency: 2304 MHz, CPU Physical cores: 4, Host memory: 8442 MB
+#-----------------------------------------------------------
+start_gui
+open_project C:/Users/carle/OneDrive/Escritorio/PHR-RISCV/Pipeline/Pipeline.xpr
+update_compile_order -fileset sources_1
+close [ open C:/Users/carle/OneDrive/Escritorio/PHR-RISCV/Pipeline/Pipeline.srcs/sources_1/new/EXE.vhd w ]
+add_files C:/Users/carle/OneDrive/Escritorio/PHR-RISCV/Pipeline/Pipeline.srcs/sources_1/new/EXE.vhd
+update_compile_order -fileset sources_1
