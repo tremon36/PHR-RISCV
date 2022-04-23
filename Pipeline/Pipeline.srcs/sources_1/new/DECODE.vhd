@@ -13,7 +13,7 @@ entity DECODE is
         --campos de la instruccion decodificada
         ---operando 1 				          (32 bit) --cuando solo hay un operando, lo metemos aqui
         ---operando 2				          (32 bit) --el inmediato va en el operando dos
-        ---inmediato (offset)			      (12 bit)
+        ---inmediato (offset)			      (12 bit) --puede actuar como inmediato en algunos casos para la alu (shifts)
         ---dirección de registro de destino   (5 bit)
         ---SUBOPCODE 			              (3 bit)
         ---OPCODE 				              (7 bit)      
@@ -33,12 +33,14 @@ component Registro_Intermedio_Decodificado
  
 signal resultado: std_logic_vector (90 downto 0);
 signal OPCODE: std_logic_vector(6 downto 0);
+signal SUBOPCODE: std_logic_vector(2 downto 0);
 
 begin
 
 registro_salida: Registro_Intermedio_Decodificado port map(reset,stall,clock,resultado,decoded_instruction);
 
 OPCODE <= instruction (6 downto 0);
+SUBOPCODE <= instruction(14 downto 12);
 
 process(clock) begin
     if(clock = '1' and clock'event) then
@@ -47,9 +49,13 @@ process(clock) begin
          else
          
          if stall = '0' then
+         
+         stall_prev <= '0';
+         
             case OPCODE is 
-                when "0110111" or "0010111" or "1101111"=>  --auipc,lui,jal 
-                    resultado <= X"0000" & instruction(31 downto 12) & X"00000000" & X"000" & instruction(11 downto 7) &"000" & instruction(6 downto 0);
+            
+                when "0110111" | "0010111" | "1101111"=>  --auipc,lui,jal 
+                    resultado <= X"000" & instruction(31 downto 12) & X"00000000" & X"000" & instruction(11 downto 7) &"000" & instruction(6 downto 0);
                               --   Uns        OPERANDO 1                OPERANDO 2     OFF             RD                SUB      OPCODE
                 when "1100111" => --jalr 
                     rs1_dir <= instruction(19 downto 15);
@@ -58,16 +64,65 @@ process(clock) begin
                 when "1100011" => -- Todos los del tipo B (BRANCH)
                     rs1_dir <= instruction(19 downto 15);
                     rs2_dir <= instruction(24 downto 20);
-                    resultado <= data_rs1 & data_rs2 & instruction(31 downto 25) & instruction (11 downto 6) & "0" & "00000" & instruction(14 downto 12) & instruction(6 downto 0);
+                    resultado <= data_rs1 & data_rs2 & instruction(31 downto 25) & instruction (11 downto 8) & "0" & "00000" & instruction(14 downto 12) & instruction(6 downto 0);
                                --   OP1       OP2      -- Las dos partes del offset, y truncar para multiplo 2 --     RD = 0         SUBOPCODE                       OPCODE
                when "0000011" => --Instrucciones del tipo load 
                     rs1_dir <= instruction(19 downto 15);
-                    resultado <= data_rs1 & X"000" & instruction(31 downto 20) & X"000" & instruction (11 downto 7) & instruction(14 downto 12) & instruction(6 downto 0);
+                    resultado <= data_rs1 & X"00000" & instruction(31 downto 20) & X"000" & instruction (11 downto 7) & instruction(14 downto 12) & instruction(6 downto 0);
                                --  OP1       UNS             INNMEDIATO            OFF            RD                         SUBOPCODE                  OPCODE
-               when " -- TODO SIGUIENTE STORES
+               when "0100011" => --Instrucciones del tipo store 
+                    rs1_dir <= instruction(19 downto 15);
+                    rs2_dir <= instruction(24 downto 20);
+                    resultado <= data_rs1 & data_rs2 & instruction(31 downto 25) & instruction(11 downto 7) & "00000" & instruction(14 downto 12) & instruction(6 downto 0);
+                               -- OP1         OP2      --- OFFSET (DIVIDIDO)-------------------------------    RD = 0         SUBOPCODE                  OPCODE  
+                               
+               when "0010011" => -- Instrucciones de tipo Inmediato en la ALU 
+               
+                 rs1_dir <= instruction(19 downto 15);
+                 
+                 if(SUBOPCODE = "001" or SUBOPCODE = "101") then --instrucciones de shift logico (tienen shamt)
+                    resultado <= data_rs1 & X"000000" & "000" & instruction(24 downto 20) & "00000" & instruction(31 downto 25) & instruction(11 downto 7) & instruction(14 downto 12) & instruction(6 downto 0);
+                  --              OP1      -------- OP2 -> shamt extendido sin signo ----   ---------- OFFSET = TAG -----------        RD                             SUBOPCODE                OPCODE
+                 else                                   
                     
+                    if(SUBOPCODE = "011") then  --Diferenciacion entre los unsigned y los signed, aplicar sign-extend
+                    resultado <= data_rs1 & X"00000" & instruction(31 downto 20) & X"000" & instruction(11 downto 7) & instruction(14 downto 12) & instruction(6 downto 0);
+                              --  OP1       -------OP2 (UNSIGNED) -------------    OFFSET    ------RD----------------           SUBOPCODE                  OPCODE
+                    else 
+                    if(instruction(31) = '1') then 
+                    resultado <= data_rs1 & X"11111" & instruction(31 downto 20) & X"000" & instruction(11 downto 7) & instruction(14 downto 12) & instruction(6 downto 0);
+                              --  OP1       -------OP2 (SIGNED) ---------------    OFFSET    ------RD----------------           SUBOPCODE                  OPCODE
+                    else 
+                    resultado <= data_rs1 & X"00000" & instruction(31 downto 20) & X"000" & instruction(11 downto 7) & instruction(14 downto 12) & instruction(6 downto 0);
+                              --  OP1       -------OP2 (SIGNED) ---------------    OFFSET    ------RD----------------           SUBOPCODE                  OPCODE                    
+                    end if;
+                    end if;
+                 end if;
+                     
+               when "0110011" => -- Instrucciones de la ALU sin operandos inmediatos
+                    rs1_dir <= instruction(19 downto 15);
+                    rs2_dir <= instruction(24 downto 20);  
+                    resultado <= data_rs1 & data_rs2 & "00000" & instruction(31 downto 25) & instruction (11 downto 7) & instruction(14 downto 12) & instruction(6 downto 0);
+                    --              OP1        OP2     ---------- OFFSET = TAG -----------           RD                          SUBOPCODE                   OPCODE
+                    
+               --TODO => FALTAN LAS INSTRUCCIONES RARAS ESAS
+                    
+              when others => -- NO OPERATION
+                    rs1_dir <= "00000";
+                    rs2_dir <= "00000";
+                    resultado <=  x"0000000000000000000000" & "000";
+              end case;
             
+            else
             
-
+             stall_prev <= '1'; 
+             
+            end if;
+          
+          end if;
+       
+       end if;
+       
+   end process;
 
 end Behavioral;
