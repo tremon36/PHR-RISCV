@@ -54,18 +54,24 @@ process(clock) begin
          
             case OPCODE is 
             
-                when "0110111" | "0010111" | "1101111"=>  --auipc,lui,jal 
+                when "0110111" | "0010111" =>  --auipc,lui
                     resultado <= X"000" & instruction(31 downto 12) & X"00000000" & X"000" & instruction(11 downto 7) &"000" & instruction(6 downto 0);
-                              --   Uns        OPERANDO 1                OPERANDO 2     OFF             RD                SUB      OPCODE
+                
+                when  "1101111" => --jal
+                    resultado <= instruction(31) & instruction(31) & instruction(31) & instruction(31) & instruction(31) & instruction(31) & instruction(31) & instruction(31) & instruction(31) & instruction(31) & instruction(31) & 
+                                 instruction(31) & instruction(19 downto 12) & instruction(20) & instruction(30 downto 21) & "0" & x"00000000" & x"000" & instruction(11 downto 7) &  "000" & instruction(6 downto 0);       
+                                 -- CAMPOS MUY MEZCLADOS, MIRAR DOCUMENTACION--                   
+                              
                 when "1100111" => --jalr 
                     rs1_dir <= instruction(19 downto 15);
                     resultado <= data_rs1 & X"00000000" & instruction(31 downto 20) & instruction(11 downto 7) & "000" & instruction(6 downto 0);
                               --   OP1          OP2           OFFSET                        RD                    SUB           OPCODE
+                              
                 when "1100011" => -- Todos los del tipo B (BRANCH)
                     rs1_dir <= instruction(19 downto 15);
                     rs2_dir <= instruction(24 downto 20);
-                    resultado <= data_rs1 & data_rs2 & instruction(31 downto 25) & instruction (11 downto 8) & "0" & "00000" & instruction(14 downto 12) & instruction(6 downto 0);
-                               --   OP1       OP2      -- Las dos partes del offset, y truncar para multiplo 2 --     RD = 0         SUBOPCODE                       OPCODE
+                    resultado <= data_rs1 & data_rs2 & instruction(31) & instruction(7) & instruction(30 downto 25) & instruction(11 downto 9) & "0" & "00000" & instruction(14 downto 12) & instruction(6 downto 0);
+                               --   OP1       OP2      -- OFFSET DESCOLOCADO EN LA INSTRUCCION, Y TRUNCAR A 0---------------------------------------     RD = 0         SUBOPCODE                       OPCODE
                when "0000011" => --Instrucciones del tipo load 
                     rs1_dir <= instruction(19 downto 15);
                     resultado <= data_rs1 & X"00000" & instruction(31 downto 20) & X"000" & instruction (11 downto 7) & instruction(14 downto 12) & instruction(6 downto 0);

@@ -46,5 +46,6 @@ begin
     data_rs1 <= x"AAAAAAAA" after 0ns;
     
     instruction <= "0000000" & "00111" & "10111" & "000" & "00001" & "0110011" after 0ns; --A DD CON R1 = 7 ; R2 = 23 ; RD = 1
+                   
 
 end Test;
