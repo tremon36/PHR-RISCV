@@ -1,11 +1,11 @@
 
 { 
-    crc :  145509635971532606  , 
+    crc :  1143751820020169034  , 
     ccp_crc :  0  , 
-    cmdline : " --incr --debug typical --relax --mt 8 -L xil_defaultlib -L secureip --snapshot TEST_DECODE_behav xil_defaultlib.TEST_DECODE" , 
+    cmdline : " --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot TEST_DECODE_behav xil_defaultlib.TEST_DECODE" , 
     buildDate : "Oct 19 2021" , 
-    buildTime : "02:56:52" , 
-    linkCmd : "/usr/bin/gcc -Wa,-W  -O -fPIC  -m64  -Wl,--no-as-needed  -Wl,--unresolved-symbols=ignore-all  -o \"xsim.dir/TEST_DECODE_behav/xsimk\"   \"xsim.dir/TEST_DECODE_behav/obj/xsim_0.lnx64.o\" \"xsim.dir/TEST_DECODE_behav/obj/xsim_1.lnx64.o\" -L\"/tools/Xilinx/Vivado/2021.2/lib/lnx64.o\" -lrdi_simulator_kernel   -lrdi_simbridge_kernel" , 
+    buildTime : "03:16:22" , 
+    linkCmd : "D:\\Vivado\\2021.2\\data\\..\\tps\\mingw\\6.2.0\\win64.o\\nt\\bin\\gcc.exe -Wa,-W  -O -Wl,--stack,104857600 -o \"xsim.dir/TEST_DECODE_behav/xsimk.exe\"   \"xsim.dir/TEST_DECODE_behav/obj/xsim_0.win64.obj\" \"xsim.dir/TEST_DECODE_behav/obj/xsim_1.win64.obj\" -L\"D:\\Vivado\\2021.2\\lib\\win64.o\" -lrdi_simulator_kernel   -lrdi_simbridge_kernel" , 
     aggregate_nets : 
     [ 
     ] 
