@@ -787,3 +787,24 @@ selectCodeEditor("EXE.vhd", 187, 536); // be
 typeControlKey((HResource) null, "EXE.vhd", 'c'); // be
 // TclEventType: DG_GRAPH_STALE
 // TclEventType: FILE_SET_CHANGE
+// HMemoryUtils.trashcanNow. Engine heap size: 1,262 MB. GUI used memory: 64 MB. Current time: 4/23/22, 2:40:26 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,262 MB. GUI used memory: 65 MB. Current time: 4/23/22, 3:10:26 PM CEST
+// WARNING: HEventQueue.dispatchEvent() is taking  236053750 ms.
+// HMemoryUtils.trashcanNow. Engine heap size: 1,262 MB. GUI used memory: 63 MB. Current time: 4/26/22, 8:56:15 AM CEST
+// WARNING: HSwingWorker (Refresh Filesets Swing Worker) is taking 236055582 ms. Increasing delay to 708166746 ms.
+// HMemoryUtils.trashcanNow. Engine heap size: 1,262 MB. GUI used memory: 63 MB. Current time: 4/26/22, 9:26:15 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,262 MB. GUI used memory: 63 MB. Current time: 4/26/22, 9:56:16 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,262 MB. GUI used memory: 63 MB. Current time: 4/26/22, 10:26:16 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,262 MB. GUI used memory: 63 MB. Current time: 4/26/22, 10:56:16 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,262 MB. GUI used memory: 63 MB. Current time: 4/26/22, 11:26:17 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,262 MB. GUI used memory: 63 MB. Current time: 4/26/22, 11:56:17 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,262 MB. GUI used memory: 63 MB. Current time: 4/26/22, 12:26:17 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,262 MB. GUI used memory: 63 MB. Current time: 4/26/22, 12:56:18 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,262 MB. GUI used memory: 63 MB. Current time: 4/26/22, 1:26:18 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,262 MB. GUI used memory: 63 MB. Current time: 4/26/22, 1:56:18 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,262 MB. GUI used memory: 63 MB. Current time: 4/26/22, 2:26:18 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,262 MB. GUI used memory: 63 MB. Current time: 4/26/22, 2:56:19 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,262 MB. GUI used memory: 64 MB. Current time: 4/26/22, 3:26:19 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,262 MB. GUI used memory: 63 MB. Current time: 4/26/22, 3:56:19 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,262 MB. GUI used memory: 63 MB. Current time: 4/26/22, 4:26:20 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,262 MB. GUI used memory: 63 MB. Current time: 4/26/22, 4:56:20 PM CEST
