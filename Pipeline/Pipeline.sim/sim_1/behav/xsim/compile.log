@@ -1,2 +1,2 @@
-INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/ismae/Desktop/PHR-RISCV/Pipeline/Pipeline.srcs/sim_1/new/TEST_DECODE.vhd" into library xil_defaultlib
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/tremon/PHR/PHR-RISCV/Pipeline/Pipeline.srcs/sim_1/new/TEST_DECODE.vhd" into library xil_defaultlib
 INFO: [VRFC 10-3107] analyzing entity 'TEST_DECODE'

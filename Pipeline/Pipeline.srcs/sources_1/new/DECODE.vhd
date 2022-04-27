@@ -55,7 +55,7 @@ process(clock) begin
             case OPCODE is 
             
                 when "0110111" | "0010111" =>  --auipc,lui
-                    resultado <= X"000" & instruction(31 downto 12) & X"00000000" & X"000" & instruction(11 downto 7) &"000" & instruction(6 downto 0);
+                    resultado <= instruction(31 downto 12) & X"000" & X"00000000" & X"000" & instruction(11 downto 7) &"000" & instruction(6 downto 0);
                 
                 when  "1101111" => --jal
                     resultado <= instruction(31) & instruction(31) & instruction(31) & instruction(31) & instruction(31) & instruction(31) & instruction(31) & instruction(31) & instruction(31) & instruction(31) & instruction(31) & 

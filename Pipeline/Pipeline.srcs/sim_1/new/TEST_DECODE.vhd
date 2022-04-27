@@ -74,7 +74,7 @@ begin
 --  18:	00f64463          	blt	a2,a5,20 <_boot+0x20>
 --  20:	00f67463          	bleu	a5,a2,28 <_boot+0x28>
 --  28:	00f66463          	bltu	a2,a5,30 <_boot+0x30>
---  30:	000002ef          	jal	t0,30 <_boot+0x30>
+--  30:	004002ef         	jal	t0,30 <_boot+0x30>
 --  34:	006602e7          	jalr	t0,6(a2)
     
     instruction <= x"00f612b3" after 20ns, 
@@ -100,7 +100,12 @@ begin
                      x"00663293"after 220ns,
                      x"00f61463"after 230ns,
                      x"00f60463" after 240ns,
-                     x"00f65463" after 250 ns;
+                     x"00f65463" after 250 ns,
+                     x"00f64463" after 260 ns,
+                     x"00f67463" after 270ns,
+                     x"00f66463" after 280 ns,
+                     x"004002ef" after 290 ns, --jal
+                     x"006602e7" after 300ns; 
                     
                    
 
