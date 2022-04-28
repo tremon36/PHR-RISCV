@@ -1,7 +1,7 @@
 Vivado Simulator v2021.2
 Copyright 1986-1999, 2001-2021 Xilinx, Inc. All Rights Reserved.
-Running: /tools/Xilinx/Vivado/2021.2/bin/unwrapped/lnx64.o/xelab --incr --debug typical --relax --mt 8 -L xil_defaultlib -L secureip --snapshot TEST_DECODE_behav xil_defaultlib.TEST_DECODE -log elaborate.log 
-Using 8 slave threads.
+Running: D:/Vivado/2021.2/bin/unwrapped/win64.o/xelab.exe --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot TEST_PRUEBA_behav xil_defaultlib.TEST_PRUEBA -log elaborate.log 
+Using 2 slave threads.
 Starting static elaboration
 Completed static elaboration
 Starting simulation data flow analysis
@@ -10,7 +10,8 @@ Time Resolution for simulation is 1ps
 Compiling package std.standard
 Compiling package std.textio
 Compiling package ieee.std_logic_1164
-Compiling architecture behavioral of entity xil_defaultlib.Registro_Intermedio_Decodificado [registro_intermedio_decodificado...]
-Compiling architecture behavioral of entity xil_defaultlib.DECODE [decode_default]
-Compiling architecture test of entity xil_defaultlib.test_decode
-Built simulation snapshot TEST_DECODE_behav
+Compiling package ieee.std_logic_arith
+Compiling package ieee.std_logic_signed
+Compiling architecture behavioral of entity xil_defaultlib.PRUEBA [prueba_default]
+Compiling architecture test of entity xil_defaultlib.test_prueba
+Built simulation snapshot TEST_PRUEBA_behav

@@ -11,8 +11,8 @@ architecture Test of TEST_DECODE is
      port(
         reset,stall,clock: in std_logic;
         instruction,data_rs2,data_rs1: in std_logic_vector(31 downto 0);
-        rs2_dir,rs1_dir: out std_logic_vector(4 downto 0);
-        stall_prev: out std_logic;
+        rs2_dir,rs1_dir,rd_dir: out std_logic_vector(4 downto 0);
+        stall_prev,register_r: out std_logic;
         decoded_instruction: out std_logic_vector(90 downto 0) 
         
         --campos de la instruccion decodificada
@@ -26,14 +26,14 @@ architecture Test of TEST_DECODE is
         );
     end component DECODE;
     
-    signal reset,stall,clock,stall_prev: std_logic;
+    signal reset,stall,clock,stall_prev,register_r: std_logic;
     signal instruction,data_rs2,data_rs1: std_logic_vector(31 downto 0);
-    signal rs2_dir,rs1_dir: std_logic_vector(4 downto 0);
+    signal rs2_dir,rs1_dir,rd_dir: std_logic_vector(4 downto 0);
     signal decoded_instruction: std_logic_vector(90 downto 0);
     
 begin
 
-    decoder : DECODE port map(reset,stall,clock,instruction,data_rs2,data_rs1,rs2_dir,rs1_dir,stall_prev,decoded_instruction);
+    decoder : DECODE port map(reset,stall,clock,instruction,data_rs2,data_rs1,rs2_dir,rs1_dir,rd_dir,stall_prev,register_r,decoded_instruction);
     
     reloj: process begin
     clock <= '1';wait for 5ns;

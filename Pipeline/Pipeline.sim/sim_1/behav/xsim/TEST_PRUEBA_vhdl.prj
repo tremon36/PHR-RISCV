@@ -1,0 +1,7 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  \
+"../../../../Pipeline.srcs/sources_1/new/PRUEBA.vhd" \
+"../../../../Pipeline.srcs/sim_1/new/TEST_PRUEBA.vhd" \
+
+# Do not sort compile order
+nosort
