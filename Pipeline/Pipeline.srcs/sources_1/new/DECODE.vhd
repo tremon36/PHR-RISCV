@@ -37,7 +37,7 @@ signal SUBOPCODE: std_logic_vector(2 downto 0);
 
 begin
 
-registro_salida: Registro_Intermedio_Decodificado port map(reset,stall,clock,resultado,decoded_instruction);
+decoded_instruction <= resultado;
 
 OPCODE <= instruction (6 downto 0);
 SUBOPCODE <= instruction(14 downto 12);
