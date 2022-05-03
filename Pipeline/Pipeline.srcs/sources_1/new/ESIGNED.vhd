@@ -9,7 +9,7 @@ entity ESIGNED is
         g,e,l: out std_logic );
 end ESIGNED;
 
-architecture Behavioral of EUNSIGNED is
+architecture Behavioral of ESIGNED is
 
 begin
 g <= '1' when num1 > num2 else '0';
@@ -17,3 +17,5 @@ e <= '1' when num1 = num2 else '0';
 l <= '1' when num1 < num2 else '0';
 
 end Behavioral;
+
+

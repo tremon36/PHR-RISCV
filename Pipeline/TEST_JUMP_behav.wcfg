@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="TEST_JUMP_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="TEST_JUMP" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0.000 ns"></ZoomStartTime>
+      <ZoomEndTime time="140.498 ns"></ZoomEndTime>
+      <Cursor1Time time="53.315 ns"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="459"></NameColumnWidth>
+      <ValueColumnWidth column_width="210"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="12" />
+   <wvobject fp_name="/TEST_JUMP/reset" type="logic">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/TEST_JUMP/stall" type="logic">
+      <obj_property name="ElementShortName">stall</obj_property>
+      <obj_property name="ObjectShortName">stall</obj_property>
+   </wvobject>
+   <wvobject fp_name="/TEST_JUMP/clock" type="logic">
+      <obj_property name="ElementShortName">clock</obj_property>
+      <obj_property name="ObjectShortName">clock</obj_property>
+   </wvobject>
+   <wvobject fp_name="/TEST_JUMP/stall_prev" type="logic">
+      <obj_property name="ElementShortName">stall_prev</obj_property>
+      <obj_property name="ObjectShortName">stall_prev</obj_property>
+   </wvobject>
+   <wvobject fp_name="/TEST_JUMP/reset_prev" type="logic">
+      <obj_property name="ElementShortName">reset_prev</obj_property>
+      <obj_property name="ObjectShortName">reset_prev</obj_property>
+   </wvobject>
+   <wvobject fp_name="/TEST_JUMP/enable_parallel_cp" type="logic">
+      <obj_property name="ElementShortName">enable_parallel_cp</obj_property>
+      <obj_property name="ObjectShortName">enable_parallel_cp</obj_property>
+   </wvobject>
+   <wvobject fp_name="/TEST_JUMP/instruction_z" type="array">
+      <obj_property name="ElementShortName">instruction_z[90:0]</obj_property>
+      <obj_property name="ObjectShortName">instruction_z[90:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/TEST_JUMP/current_pc" type="array">
+      <obj_property name="ElementShortName">current_pc[31:0]</obj_property>
+      <obj_property name="ObjectShortName">current_pc[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/TEST_JUMP/pc_actualizado" type="array">
+      <obj_property name="ElementShortName">pc_actualizado[31:0]</obj_property>
+      <obj_property name="ObjectShortName">pc_actualizado[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/TEST_JUMP/decoded_instruction" type="array">
+      <obj_property name="ElementShortName">decoded_instruction[90:0]</obj_property>
+      <obj_property name="ObjectShortName">decoded_instruction[90:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/TEST_JUMP/jumper/signed_offset" type="array">
+      <obj_property name="ElementShortName">signed_offset[31:0]</obj_property>
+      <obj_property name="ObjectShortName">signed_offset[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/TEST_JUMP/decoder/decoded_instruction" type="array">
+      <obj_property name="ElementShortName">decoded_instruction[90:0]</obj_property>
+      <obj_property name="ObjectShortName">decoded_instruction[90:0]</obj_property>
+   </wvobject>
+</wave_config>

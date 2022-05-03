@@ -7,8 +7,8 @@ use ieee.std_logic_signed.all;
 
 entity JUMP is
  Port (reset,stall,clk:in std_logic;
-        instruction:in std_logic_vector(91 downto 0);
-        instruction_z:out std_logic_vector(91 downto 0);
+        instruction:in std_logic_vector(90 downto 0);
+        instruction_z:out std_logic_vector(90 downto 0);
         current_pc:in std_logic_vector(31 downto 0);
         pc_actualizado:out std_logic_vector(31 downto 0);
         reset_prev,enable_parallel_cp:out std_logic 
@@ -26,7 +26,7 @@ end component;
         g,e,l: out std_logic);
 end component;
  
- signal resultado:std_logic_vector(91 downto 0);
+ signal resultado:std_logic_vector(90 downto 0);
  signal OPCODE: std_logic_vector(6 downto 0);
  signal SUBOPCODE:std_logic_vector(2 downto 0);
  signal gu,eu,lu, g,e,l:std_logic;
@@ -53,11 +53,13 @@ begin
          if stall = '0' then
             
             
+            OPCODE <= instruction(6 downto 0);
+            SUBOPCODE <= instruction(9 downto 7);
          
             resultado <= instruction;
             
             case OPCODE is 
-                when "110011" => --es BRANCH1
+                when "1100011" => --es BRANCH1
                 num1<=instruction(90 downto 59);
                 num2<= instruction(58 downto 27);
                 reset_prev <= '1';
@@ -93,6 +95,8 @@ begin
                         pc_actualizado <= signed_offset + current_pc;
                         else enable_parallel_cp <= '0';
                         end if;
+                      when others => enable_parallel_cp <= '0';
+                                     reset_prev <= '0';
                       end case;
                 when "1101111" => -- JAL 
                        pc_actualizado <= instruction(90 downto 59) + current_pc;

@@ -17,3 +17,4 @@ e <= '1' when num1 = num2 else '0';
 l <= '1' when num1 < num2 else '0';
 
 end Behavioral;
+

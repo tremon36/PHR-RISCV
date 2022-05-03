@@ -1,6 +1,6 @@
 Vivado Simulator v2021.2
 Copyright 1986-1999, 2001-2021 Xilinx, Inc. All Rights Reserved.
-Running: D:/Vivado/2021.2/bin/unwrapped/win64.o/xelab.exe --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot TEST_PRUEBA_behav xil_defaultlib.TEST_PRUEBA -log elaborate.log 
+Running: D:/Vivado/2021.2/bin/unwrapped/win64.o/xelab.exe --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot TEST_JUMP_behav xil_defaultlib.TEST_JUMP -log elaborate.log 
 Using 2 slave threads.
 Starting static elaboration
 Completed static elaboration
@@ -10,8 +10,13 @@ Time Resolution for simulation is 1ps
 Compiling package std.standard
 Compiling package std.textio
 Compiling package ieee.std_logic_1164
+Compiling package ieee.numeric_std
 Compiling package ieee.std_logic_arith
 Compiling package ieee.std_logic_signed
-Compiling architecture behavioral of entity xil_defaultlib.PRUEBA [prueba_default]
-Compiling architecture test of entity xil_defaultlib.test_prueba
-Built simulation snapshot TEST_PRUEBA_behav
+Compiling package ieee.std_logic_unsigned
+Compiling architecture behavioral of entity xil_defaultlib.EUNSIGNED [eunsigned_default]
+Compiling architecture behavioral of entity xil_defaultlib.ESIGNED [esigned_default]
+Compiling architecture behavioral of entity xil_defaultlib.JUMP [jump_default]
+Compiling architecture behavioral of entity xil_defaultlib.DECODE [decode_default]
+Compiling architecture test of entity xil_defaultlib.test_jump
+Built simulation snapshot TEST_JUMP_behav

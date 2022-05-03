@@ -1,4 +1,2 @@
-INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/ismae/Desktop/PHR-RISCV/Pipeline/Pipeline.srcs/sources_1/new/PRUEBA.vhd" into library xil_defaultlib
-INFO: [VRFC 10-3107] analyzing entity 'PRUEBA'
-INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/ismae/Desktop/PHR-RISCV/Pipeline/Pipeline.srcs/sim_1/new/TEST_PRUEBA.vhd" into library xil_defaultlib
-INFO: [VRFC 10-3107] analyzing entity 'TEST_PRUEBA'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/ismae/Desktop/PHR-RISCV/Pipeline/Pipeline.srcs/sim_1/new/TEST_JUMP.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'TEST_JUMP'
