@@ -62,8 +62,8 @@ begin
                   x"fe010ee3" after 30ns,
                   x"fe011ee3" after 40ns,
                   x"fe015ee3" after 50ns,
-                 x"fe014ee3" after 60ns,
-                x"fe017ee3" after 70ns,
+                  x"fe014ee3" after 60ns,
+                  x"fe017ee3" after 70ns,
                   x"fe016ee3" after 80ns,
                   x"ffdff16f" after 90ns,
                   x"008102e7" after 100ns;

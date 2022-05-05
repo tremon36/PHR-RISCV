@@ -2,16 +2,8 @@
 2020.2
 Oct 19 2021
 03:16:22
-C:/Users/ismae/Desktop/PHR-RISCV/Pipeline/Pipeline.srcs/sim_1/new/TEST_DECODE.vhd,1651159593,vhdl,,,,test_decode,,,,,,,,
-C:/Users/ismae/Desktop/PHR-RISCV/Pipeline/Pipeline.srcs/sim_1/new/TEST_FETCH.vhd,1650704517,vhdl,,,,test_fetch,,,,,,,,
-C:/Users/ismae/Desktop/PHR-RISCV/Pipeline/Pipeline.srcs/sim_1/new/TEST_JUMP.vhd,1651588927,vhdl,,,,test_jump,,,,,,,,
-C:/Users/ismae/Desktop/PHR-RISCV/Pipeline/Pipeline.srcs/sim_1/new/TEST_PRUEBA.vhd,1651163320,vhdl,,,,test_prueba,,,,,,,,
-C:/Users/ismae/Desktop/PHR-RISCV/Pipeline/Pipeline.srcs/sources_1/new/CP.vhd,1650704343,vhdl,,,,cp,,,,,,,,
-C:/Users/ismae/Desktop/PHR-RISCV/Pipeline/Pipeline.srcs/sources_1/new/DECODE.vhd,1651583065,vhdl,,,,decode,,,,,,,,
-C:/Users/ismae/Desktop/PHR-RISCV/Pipeline/Pipeline.srcs/sources_1/new/ESIGNED.vhd,1651583801,vhdl,,,,esigned,,,,,,,,
-C:/Users/ismae/Desktop/PHR-RISCV/Pipeline/Pipeline.srcs/sources_1/new/EUNSIGNED.vhd,1651583885,vhdl,,,,eunsigned,,,,,,,,
-C:/Users/ismae/Desktop/PHR-RISCV/Pipeline/Pipeline.srcs/sources_1/new/FETCH.vhd,1650704381,vhdl,,,,fetch,,,,,,,,
-C:/Users/ismae/Desktop/PHR-RISCV/Pipeline/Pipeline.srcs/sources_1/new/JUMP.vhd,1651587653,vhdl,,,,jump,,,,,,,,
-C:/Users/ismae/Desktop/PHR-RISCV/Pipeline/Pipeline.srcs/sources_1/new/PRUEBA.vhd,1651163313,vhdl,,,,prueba,,,,,,,,
-C:/Users/ismae/Desktop/PHR-RISCV/Pipeline/Pipeline.srcs/sources_1/new/RegistroF.vhd,1650704395,vhdl,,,,registrof,,,,,,,,
-C:/Users/ismae/Desktop/PHR-RISCV/Pipeline/Pipeline.srcs/sources_1/new/Registro_Intermedio_Decodificado.vhd,1650707175,vhdl,,,,registro_intermedio_decodificado,,,,,,,,
+C:/Users/user2/PHR-RISCV/Pipeline/Pipeline.srcs/sim_1/new/TEST_JUMP.vhd,1651772125,vhdl,,,,test_jump,,,,,,,,
+C:/Users/user2/PHR-RISCV/Pipeline/Pipeline.srcs/sources_1/new/DECODE.vhd,1651770723,vhdl,,,,decode,,,,,,,,
+C:/Users/user2/PHR-RISCV/Pipeline/Pipeline.srcs/sources_1/new/ESIGNED.vhd,1651770723,vhdl,,,,esigned,,,,,,,,
+C:/Users/user2/PHR-RISCV/Pipeline/Pipeline.srcs/sources_1/new/EUNSIGNED.vhd,1651770723,vhdl,,,,eunsigned,,,,,,,,
+C:/Users/user2/PHR-RISCV/Pipeline/Pipeline.srcs/sources_1/new/JUMP.vhd,1651770904,vhdl,,,,jump,,,,,,,,

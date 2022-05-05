@@ -3,8 +3,6 @@ use IEEE.STD_LOGIC_1164.ALL;
 use ieee.numeric_std.all;
 use ieee.std_logic_signed.all;
 
-
-
 entity JUMP is
  Port (reset,stall,clk:in std_logic;
         instruction:in std_logic_vector(90 downto 0);
