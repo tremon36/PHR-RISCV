@@ -58,6 +58,7 @@ process(clk,reset)
               else instruction_z<=decoded_instruction;
         end if;
        end if;
+       end if;
  end process;
 
 end Behavioral;
