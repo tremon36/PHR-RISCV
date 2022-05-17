@@ -1,2 +1,0 @@
-# PHR-RISCV
-riscv

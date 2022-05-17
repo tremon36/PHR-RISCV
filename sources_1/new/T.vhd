@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date: 28.04.2022 17:24:26
+-- Create Date: 17.05.2022 15:33:51
 -- Design Name: 
--- Module Name: shift_reg - Behavioral
+-- Module Name: T - Behavioral
 -- Project Name: 
 -- Target Devices: 
 -- Tool Versions: 
@@ -31,11 +31,11 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity shift_reg is
+entity T is
 --  Port ( );
-end shift_reg;
+end T;
 
-architecture Behavioral of shift_reg is
+architecture Behavioral of T is
 
 begin
 
