@@ -6,8 +6,8 @@ entity DECODE is
     port(
         reset,stall,clock: in std_logic;
         instruction,data_rs2,data_rs1: in std_logic_vector(31 downto 0);
-        rs2_dir,rs1_dir: out std_logic_vector(4 downto 0);
-        stall_prev: out std_logic;
+        rs2_dir,rs1_dir,rd_dir: out std_logic_vector(4 downto 0);
+        stall_prev,register_r: out std_logic;
         decoded_instruction: out std_logic_vector(90 downto 0) 
         
         --campos de la instruccion decodificada
@@ -37,7 +37,7 @@ signal SUBOPCODE: std_logic_vector(2 downto 0);
 
 begin
 
-registro_salida: Registro_Intermedio_Decodificado port map(reset,stall,clock,resultado,decoded_instruction);
+decoded_instruction <= resultado;
 
 OPCODE <= instruction (6 downto 0);
 SUBOPCODE <= instruction(14 downto 12);
@@ -55,19 +55,27 @@ process(clock) begin
             case OPCODE is 
             
                 when "0110111" | "0010111" =>  --auipc,lui
-                    resultado <= X"000" & instruction(31 downto 12) & X"00000000" & X"000" & instruction(11 downto 7) &"000" & instruction(6 downto 0);
+                    resultado <= instruction(31 downto 12) & X"000" & X"00000000" & X"000" & instruction(11 downto 7) &"000" & instruction(6 downto 0);
+                    register_r<='1';
+                    rd_dir<= instruction(11 downto 7);
                 
                 when  "1101111" => --jal
                     resultado <= instruction(31) & instruction(31) & instruction(31) & instruction(31) & instruction(31) & instruction(31) & instruction(31) & instruction(31) & instruction(31) & instruction(31) & instruction(31) & 
                                  instruction(31) & instruction(19 downto 12) & instruction(20) & instruction(30 downto 21) & "0" & x"00000000" & x"000" & instruction(11 downto 7) &  "000" & instruction(6 downto 0);       
+                     register_r<='1';
+                     rd_dir<= instruction(11 downto 7);
                                  -- CAMPOS MUY MEZCLADOS, MIRAR DOCUMENTACION--                   
                               
                 when "1100111" => --jalr 
                     rs1_dir <= instruction(19 downto 15);
                     resultado <= data_rs1 & X"00000000" & instruction(31 downto 20) & instruction(11 downto 7) & "000" & instruction(6 downto 0);
                               --   OP1          OP2           OFFSET                        RD                    SUB           OPCODE
+                     register_r<='1';
+                     rd_dir<= instruction(11 downto 7);
                               
                 when "1100011" => -- Todos los del tipo B (BRANCH)
+                     register_r<='0';
+                    rd_dir<= "00000";
                     rs1_dir <= instruction(19 downto 15);
                     rs2_dir <= instruction(24 downto 20);
                     resultado <= data_rs1 & data_rs2 & instruction(31) & instruction(7) & instruction(30 downto 25) & instruction(11 downto 9) & "0" & "00000" & instruction(14 downto 12) & instruction(6 downto 0);
@@ -76,14 +84,19 @@ process(clock) begin
                     rs1_dir <= instruction(19 downto 15);
                     resultado <= data_rs1 & X"00000" & instruction(31 downto 20) & X"000" & instruction (11 downto 7) & instruction(14 downto 12) & instruction(6 downto 0);
                                --  OP1       UNS             INNMEDIATO            OFF            RD                         SUBOPCODE                  OPCODE
+                    register_r<='1';
+                    rd_dir<= instruction(11 downto 7);
                when "0100011" => --Instrucciones del tipo store 
+                     register_r<='0';
+                    rd_dir<= "00000";
                     rs1_dir <= instruction(19 downto 15);
                     rs2_dir <= instruction(24 downto 20);
                     resultado <= data_rs1 & data_rs2 & instruction(31 downto 25) & instruction(11 downto 7) & "00000" & instruction(14 downto 12) & instruction(6 downto 0);
                                -- OP1         OP2      --- OFFSET (DIVIDIDO)-------------------------------    RD = 0         SUBOPCODE                  OPCODE  
                                
                when "0010011" => -- Instrucciones de tipo Inmediato en la ALU 
-               
+                  register_r<='1';
+                  rd_dir<= instruction(11 downto 7);
                  rs1_dir <= instruction(19 downto 15);
                  
                  if(SUBOPCODE = "001" or SUBOPCODE = "101") then --instrucciones de shift logico (tienen shamt)
@@ -106,6 +119,8 @@ process(clock) begin
                  end if;
                      
                when "0110011" => -- Instrucciones de la ALU sin operandos inmediatos
+                    register_r<='1';
+                    rd_dir<= instruction(11 downto 7);
                     rs1_dir <= instruction(19 downto 15);
                     rs2_dir <= instruction(24 downto 20);  
                     resultado <= data_rs1 & data_rs2 & "00000" & instruction(31 downto 25) & instruction (11 downto 7) & instruction(14 downto 12) & instruction(6 downto 0);
@@ -114,6 +129,8 @@ process(clock) begin
                --TODO => FALTAN LAS INSTRUCCIONES RARAS ESAS
                     
               when others => -- NO OPERATION
+                     register_r<='0';
+                    rd_dir<= "00000";
                     rs1_dir <= "00000";
                     rs2_dir <= "00000";
                     resultado <=  x"0000000000000000000000" & "000";

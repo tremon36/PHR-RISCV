@@ -1,6 +1,10 @@
 Vivado Simulator v2021.2
 Copyright 1986-1999, 2001-2021 Xilinx, Inc. All Rights Reserved.
+<<<<<<< HEAD
 Running: C:/Xilinx/Vivado/2021.2/bin/unwrapped/win64.o/xelab.exe --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot Test_Shift_Moduke_V2_behav xil_defaultlib.Test_Shift_Moduke_V2 -log elaborate.log 
+=======
+Running: C:/Xilinx/Vivado/2021.2/bin/unwrapped/win64.o/xelab.exe --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot TEST_JUMP_behav xil_defaultlib.TEST_JUMP -log elaborate.log 
+>>>>>>> a9a44bfa2d7285a26cdd5bc0f4ecc4d6210cdf73
 Using 2 slave threads.
 Starting static elaboration
 Completed static elaboration
@@ -12,9 +16,20 @@ Compiling package std.textio
 Compiling package ieee.std_logic_1164
 Compiling package ieee.numeric_std
 Compiling package ieee.std_logic_arith
+<<<<<<< HEAD
 Compiling package ieee.std_logic_unsigned
 Compiling architecture behavioral of entity xil_defaultlib.T_ff [t_ff_default]
 Compiling architecture behavioral of entity xil_defaultlib.Counter [counter_default]
 Compiling architecture behavioral of entity xil_defaultlib.Shift_module_v2 [shift_module_v2_default]
 Compiling architecture behavioral of entity xil_defaultlib.test_shift_moduke_v2
 Built simulation snapshot Test_Shift_Moduke_V2_behav
+=======
+Compiling package ieee.std_logic_signed
+Compiling package ieee.std_logic_unsigned
+Compiling architecture behavioral of entity xil_defaultlib.EUNSIGNED [eunsigned_default]
+Compiling architecture behavioral of entity xil_defaultlib.ESIGNED [esigned_default]
+Compiling architecture behavioral of entity xil_defaultlib.JUMP [jump_default]
+Compiling architecture behavioral of entity xil_defaultlib.DECODE [decode_default]
+Compiling architecture test of entity xil_defaultlib.test_jump
+Built simulation snapshot TEST_JUMP_behav
+>>>>>>> a9a44bfa2d7285a26cdd5bc0f4ecc4d6210cdf73

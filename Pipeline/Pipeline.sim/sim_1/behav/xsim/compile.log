@@ -1,2 +1,7 @@
+<<<<<<< HEAD
 INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/carle/OneDrive/Escritorio/PHR-RISCV/Pipeline/Pipeline.srcs/sim_1/new/Test_Shift_Moduke_V2.vhd" into library xil_defaultlib
 INFO: [VRFC 10-3107] analyzing entity 'Test_Shift_Moduke_V2'
+=======
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/user2/PHR-RISCV/Pipeline/Pipeline.srcs/sim_1/new/TEST_JUMP.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'TEST_JUMP'
+>>>>>>> a9a44bfa2d7285a26cdd5bc0f4ecc4d6210cdf73

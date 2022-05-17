@@ -11,8 +11,8 @@ architecture Test of TEST_DECODE is
      port(
         reset,stall,clock: in std_logic;
         instruction,data_rs2,data_rs1: in std_logic_vector(31 downto 0);
-        rs2_dir,rs1_dir: out std_logic_vector(4 downto 0);
-        stall_prev: out std_logic;
+        rs2_dir,rs1_dir,rd_dir: out std_logic_vector(4 downto 0);
+        stall_prev,register_r: out std_logic;
         decoded_instruction: out std_logic_vector(90 downto 0) 
         
         --campos de la instruccion decodificada
@@ -26,14 +26,14 @@ architecture Test of TEST_DECODE is
         );
     end component DECODE;
     
-    signal reset,stall,clock,stall_prev: std_logic;
+    signal reset,stall,clock,stall_prev,register_r: std_logic;
     signal instruction,data_rs2,data_rs1: std_logic_vector(31 downto 0);
-    signal rs2_dir,rs1_dir: std_logic_vector(4 downto 0);
+    signal rs2_dir,rs1_dir,rd_dir: std_logic_vector(4 downto 0);
     signal decoded_instruction: std_logic_vector(90 downto 0);
     
 begin
 
-    decoder : DECODE port map(reset,stall,clock,instruction,data_rs2,data_rs1,rs2_dir,rs1_dir,stall_prev,decoded_instruction);
+    decoder : DECODE port map(reset,stall,clock,instruction,data_rs2,data_rs1,rs2_dir,rs1_dir,rd_dir,stall_prev,register_r,decoded_instruction);
     
     reloj: process begin
     clock <= '1';wait for 5ns;
@@ -74,7 +74,7 @@ begin
 --  18:	00f64463          	blt	a2,a5,20 <_boot+0x20>
 --  20:	00f67463          	bleu	a5,a2,28 <_boot+0x28>
 --  28:	00f66463          	bltu	a2,a5,30 <_boot+0x30>
---  30:	000002ef          	jal	t0,30 <_boot+0x30>
+--  30:	004002ef         	jal	t0,30 <_boot+0x30>
 --  34:	006602e7          	jalr	t0,6(a2)
     
     instruction <= x"00f612b3" after 20ns, 
@@ -100,7 +100,12 @@ begin
                      x"00663293"after 220ns,
                      x"00f61463"after 230ns,
                      x"00f60463" after 240ns,
-                     x"00f65463" after 250 ns;
+                     x"00f65463" after 250 ns,
+                     x"00f64463" after 260 ns,
+                     x"00f67463" after 270ns,
+                     x"00f66463" after 280 ns,
+                     x"004002ef" after 290 ns, --jal
+                     x"006602e7" after 300ns; 
                     
                    
 
