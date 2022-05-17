@@ -1,7 +1,0 @@
-Running: xsim.dir/Test_SLU_R_behav/xsimk.exe -simmode gui -wdb Test_SLU_R_behav.wdb -simrunnum 0 -socket 49785
-Design successfully loaded
-Design Loading Memory Usage: 7056 KB (Peak: 7056 KB)
-Design Loading CPU Usage: 15 ms
-Simulation completed
-Simulation Memory Usage: 7492 KB (Peak: 7492 KB)
-Simulation CPU Usage: 30 ms
