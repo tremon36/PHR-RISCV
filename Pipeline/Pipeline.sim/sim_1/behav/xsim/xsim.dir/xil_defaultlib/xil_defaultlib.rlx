@@ -1,0 +1,17 @@
+0.7
+2020.2
+Oct 19 2021
+03:16:22
+C:/Users/carle/OneDrive/Escritorio/PHR-RISCV/Pipeline/Pipeline.srcs/sim_1/new/TEST_DECODE.vhd,1650985815,vhdl,,,,test_decode,,,,,,,,
+C:/Users/carle/OneDrive/Escritorio/PHR-RISCV/Pipeline/Pipeline.srcs/sim_1/new/TEST_ShiftModule.vhd,1651767129,vhdl,,,,test_shiftmodule,,,,,,,,
+C:/Users/carle/OneDrive/Escritorio/PHR-RISCV/Pipeline/Pipeline.srcs/sim_1/new/T_ff_Test.vhd,1651573028,vhdl,,,,t_ff_test,,,,,,,,
+C:/Users/carle/OneDrive/Escritorio/PHR-RISCV/Pipeline/Pipeline.srcs/sim_1/new/Test_SLU_R.vhd,1652290720,vhdl,,,,test_slu_r,,,,,,,,
+C:/Users/carle/OneDrive/Escritorio/PHR-RISCV/Pipeline/Pipeline.srcs/sim_1/new/Test_Shift_Moduke_V2.vhd,1652370995,vhdl,,,,test_shift_moduke_v2,,,,,,,,
+C:/Users/carle/OneDrive/Escritorio/PHR-RISCV/Pipeline/Pipeline.srcs/sim_1/new/Test_Shift_module.vhd,1651766197,vhdl,,,,test_shift_module,,,,,,,,
+C:/Users/carle/OneDrive/Escritorio/PHR-RISCV/Pipeline/Pipeline.srcs/sim_1/new/Test_counter.vhd,1651575808,vhdl,,,,test_counter,,,,,,,,
+C:/Users/carle/OneDrive/Escritorio/PHR-RISCV/Pipeline/Pipeline.srcs/sources_1/new/Counter.vhd,1652192403,vhdl,,,,counter,,,,,,,,
+C:/Users/carle/OneDrive/Escritorio/PHR-RISCV/Pipeline/Pipeline.srcs/sources_1/new/DECODE.vhd,1650985815,vhdl,,,,decode,,,,,,,,
+C:/Users/carle/OneDrive/Escritorio/PHR-RISCV/Pipeline/Pipeline.srcs/sources_1/new/Registro_Intermedio_Decodificado.vhd,1650708093,vhdl,,,,registro_intermedio_decodificado,,,,,,,,
+C:/Users/carle/OneDrive/Escritorio/PHR-RISCV/Pipeline/Pipeline.srcs/sources_1/new/ShiftLU_reg.vhd,1651765192,vhdl,,,,shiftlu_reg,,,,,,,,
+C:/Users/carle/OneDrive/Escritorio/PHR-RISCV/Pipeline/Pipeline.srcs/sources_1/new/Shift_module_v2.vhd,1652369945,vhdl,,,,shift_module_v2,,,,,,,,
+C:/Users/carle/OneDrive/Escritorio/PHR-RISCV/Pipeline/Pipeline.srcs/sources_1/new/T_ff.vhd,1652192055,vhdl,,,,t_ff,,,,,,,,

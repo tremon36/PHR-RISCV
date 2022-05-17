@@ -1,0 +1,1 @@
+--incr --debug "typical" --relax --mt "2" -L "xil_defaultlib" -L "secureip" --snapshot "TEST_ShiftModule_behav" "xil_defaultlib.TEST_ShiftModule" -log "elaborate.log" 
