@@ -14,17 +14,10 @@ entity EXE is
         clk : in std_logic;
         reset, stall_in : in std_logic;
         stall_out : out std_logic;
+        z : out std_logic_vector (90 downto 0)
         );
 end EXE;
-
 architecture Behavioral of EXE is
-
-component Registro_Intermedio_Decodificado
-    port (reset,stall,clk: in std_logic;
-          load: in std_logic_vector(90 downto 0);
-          z: out std_logic_vector(90 downto 0)  
-        );
-end component ;
 
 component Shift_module_v2 is
     Port (clk : in std_logic ;
@@ -34,70 +27,140 @@ component Shift_module_v2 is
           l_r : in std_logic;                                       --Desplazamiento a izquierda o derecha, 1 = derecha
           reset : in std_logic ;                                    --Reset signal 
           z : out std_logic_vector (31 downto 0);                   --Salida
-          stall_out : out std_logic;                                --Bit de parada del pipeline                               
-          stall_in : in std_logic);
+          enable : in std_logic;
+          end_of_op : out std_logic);                                                           
+          
 end component;
 
 signal load : std_logic_vector (90 downto 0);
-signal z : std_logic_vector (90 downto 0);
 signal s_u : std_logic;
 signal l_r : std_logic;
 signal z_alu : std_logic_vector (31 downto 0);  --Alu exit befor operations.
 signal z_shift : std_logic_vector (31 downto 0);
-signal stall_aux : std_logic ;
+signal Shift_enable : std_logic ;
+signal end_of_Shift : std_logic;
+signal debug_ERROR : std_logic ;                --Internal debugging signal. 
+
+signal Shift_Module_In_Use : std_logic;
 
 begin
 
-    reg_op : Registro_Intermedio_Decodificado port map (reset, stall_aux , clk, load, z);
-    SM : Shift_module_v2 port map(clk, op1, op2(4 downto 0), s_u, l_r, reset, z_shift , stall_aux, stall_in);
+    SM : Shift_module_v2 port map(clk, op1, op2(4 downto 0), s_u, l_r, reset, z_shift , Shift_enable, end_of_Shift );
     process (clk)
+    
         begin 
         
         if (clk = '1' and clk'event) then
-        stall_out <= stall_aux;
-            if (stall_aux = '0' and stall_in = '0')then
+            --Alu reset;
+            if (reset = '1')then
+                stall_out <= '0';
+                z_alu <= x"00000000";
+                Shift_enable <= '0';
+            end if;
+            
+--          Shift module controller, the Shift module is govern by the Shift enable that turns to one when the alu reads a shift instruction and switches to 0 when it finishes it.
+--          Beeing also the only instruction that needs more than a cicle to complete; it also controls the stall_out flaj.           
+            if(op_code = "0110011" and (sub_op_code = "001" or sub_op_code = "101"))then 
+                
+--              When the shift module finishes its gets to sleep otherwise its active.                
+                if(end_of_Shift = '1')then Shift_enable <= '0';
+                    stall_out <= '0';
+                    
+--                  Whe need to include this instructions out of the  "if ( stall_in = '0')then" becasue we need to update the exit of the alu before the the pipeline returns to  work so that                     
+--                  the write stage can read it just as the pipe restarats  
+                    z_alu <= z_shift;
+                    z <= z_shift  & op2 & rd & ofsset & sub_op_code & op_code;
+                else Shift_enable <= '1';
+                    stall_out <= '1';
+                end if;
+            end if;
+            
+            -- checks for a general pipe stall before executing any instruction, if there is one the last op value gets save in the z_alu signal which acts as a register.
+            if ( stall_in = '0')then
                 case op_code is
                 when "0110111" => z_alu  <= op2;                            --LUI
-                when "0010111" => z_alu <= op1;  
-                when "0000011" => z_alu <= op2 ;                            --LB, LH, LW, LBU, LHU  Ricardo se tiene que acordar de hacer un resize de los inmediatos.
+                when "0010111" => z_alu <= op1;                             --AUIPC Add Upper Imm to PC
+                when "0000011" => z_alu <= op1 ;                            --LB, LH, LW, LBU, LHU  Ricardo se tiene que acordar de hacer un resize de los inmediatos.
     --                case sub_op_code is 
     --                when "000" => z_alu <= op2; 
     --                end case;
                 when "0010011" =>
                     case sub_op_code is 
                         when "000" => z_alu <= op1 + op2;                       --ADDI
-                        when "010" to "011" =>                                  --SLTI & SLTIU 
+                        when "010"  =>                                         --SLTI
+                            if (op1(31) = '1')then
+                                if(op2(31) = '1')then                     --los dos son neativos.
+                                    if (op1 > op2)then z_alu <= x"00000001";
+                                    else z_alu <= x"00000000" ;
+                                    end if;
+                                else z_alu <= x"00000000" ;               --op1<0, op2>0;
+                                end if;
+                            else                                          
+                                if(op2(31) = '1')then                     --op1>0, op2<0;
+                                    z_alu <= x"00000001" ;
+                                else                                      --op1>0, op2>0;
+                                    if (op1 > op2)then z_alu <= x"00000001";
+                                    else z_alu <= x"00000000" ;
+                                    end if;
+                                end if;   
+                            end if; 
                             if (op1 > op2)then z_alu <= x"00000001";
                             else z_alu <= x"00000000" ;
-                            end if;   
+                            end if;
+                        When "011" =>                                           --SLTIU 
+                            if (op1 > op2)then z_alu <= x"00000001";
+                            else z_alu <= x"00000000" ;
+                            end if;  
                         when "100" => z_alu <= op1 xor op2;                     --XORI 
                         when "110" => z_alu  <= op1 or op2;                     --ORI
                         when "111" => z_alu  <= op1 and op2;                    --ANDI
+                        when others => debug_ERROR <= '1';
                      end case;
-                when "0010011" =>
+                when "0110011" =>
                     case sub_op_code is
-                        when "001" =>                                           --SLLI
+                        when "001" =>                                          --SLLI
                             l_r <= '0';
                             s_u <= '0';
-                            z_alu <= z_shift;           
-                        when "101" => z_alu <= z_shift;                         --SRLI & SRAI !!!!!! NO se pueden diferenciar con el op_code y el sub_opcode
+                                       
+                        when "101" =>                                        --SRLI & SRAI !!!!!! NO se pueden diferenciar con el op_code y el sub_opcode
                             l_r <= '1';
                             if(ofsset (0) = '0')then  s_u <= '0';
                             else s_u <= '1';
-                            end if;
-                            z_alu <= z_shift;          
+                            end if;          
                         when "000" => z_alu <= op1 + op2;                       --ADD & SUB !!!!!! NO se pueden diferenciar con el op_code y el sub_opcode
-                        when "010" to "011" =>                                  --SLT & SLTU  
-                            if (op1 > op2)then z_alu <= x"00000001"; 
-                            else z_alu <= x"00000000";
+                        when "010"  =>                                         --SLT
+                            if (op1(31) = '1')then
+                                if(op2(31) = '1')then                     --los dos son neativos.
+                                    if (op1 > op2)then z_alu <= x"00000001";
+                                    else z_alu <= x"00000000" ;
+                                    end if;
+                                else z_alu <= x"00000000" ;               --op1<0, op2>0;          
+                                end if;
+                            else                                          
+                                if(op2(31) = '1')then                     --op1>0, op2<0;
+                                    z_alu <= x"00000001" ;
+                                else                                      --op1>0, op2>0;
+                                    if (op1 > op2)then z_alu <= x"00000001";
+                                    else z_alu <= x"00000000" ;
+                                    end if;
+                                end if;   
+                            end if; 
+                            if (op1 > op2)then z_alu <= x"00000001";
+                            else z_alu <= x"00000000" ;
+                            end if;
+                        When "011" =>                                           --SLTU 
+                            if (op1 > op2)then z_alu <= x"00000001";
+                            else z_alu <= x"00000000" ;
                             end if; 
                         when "100" => z_alu <= op1 xor op2;                     --XOR
                         when "110" => z_alu <= op1 or op2;                      --OR
                         when "111" => z_alu <= op1 and op2;                     --AND
+                        when others => debug_ERROR <= '1';
                     end case;
+                    when others => debug_ERROR <= '1';
                 end case;
                 
-                load <= z_alu & op2 & ofsset & sub_op_code & op_code;  -- Problema de que es un proceso y necestamos mandarle un tick de reloj para que actualice los datos del registro.
+                z <= z_alu & op2 & rd & ofsset & sub_op_code & op_code;  -- Problema de que es un proceso y necestamos mandarle un tick de reloj para que actualice los datos del registro.
                 
            end if;
                 

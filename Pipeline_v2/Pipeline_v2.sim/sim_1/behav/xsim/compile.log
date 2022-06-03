@@ -1,0 +1,6 @@
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/carle/OneDrive/Escritorio/PHR-RISCV/Pipeline_v2/Pipeline_v2.srcs/sources_1/new/EXE.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'EXE'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/carle/OneDrive/Escritorio/PHR-RISCV/Pipeline_v2/Pipeline_v2.srcs/sources_1/new/Shift_module_v2.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'Shift_module_v2'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/carle/OneDrive/Escritorio/PHR-RISCV/Pipeline_v2/Pipeline_v2.srcs/sim_1/new/Test_EXE.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'Test_EXE'

@@ -1,7 +1,4 @@
-
-
-
----------------------5 bits synchronous Down counter------------------------------
+-----------------------------5 bits sincronus counter-----------------------------
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
@@ -23,7 +20,6 @@ architecture Behavioral of Counter is
   signal ONE : std_logic;
 begin
     ONE <= '1';
-    --z <=not e & not d& not c& not b& not a;
     z <= e&d&c&b&a;
     
     F1 : T_ff port map(ONE, clk, reset, a);
