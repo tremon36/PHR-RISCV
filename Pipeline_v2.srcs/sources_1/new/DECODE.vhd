@@ -8,8 +8,9 @@ entity DECODE is
         instruction,data_rs2,data_rs1: in std_logic_vector(31 downto 0);
         rs2_dir,rs1_dir,rd_dir: out std_logic_vector(4 downto 0);
         stall_prev,register_r: out std_logic;
-        decoded_instruction: out std_logic_vector(90 downto 0) 
+        decoded_instruction: out std_logic_vector(90 downto 0)
         
+                
         --campos de la instruccion decodificada
         ---operando 1 				          (32 bit) --cuando solo hay un operando, lo metemos aqui
         ---operando 2				          (32 bit) --el inmediato va en el operando dos

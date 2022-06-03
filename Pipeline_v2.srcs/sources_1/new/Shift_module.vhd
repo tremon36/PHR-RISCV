@@ -97,3 +97,5 @@ if (clk'event and clk = '1') then
     end if;
 end if;
 end process;
+
+end Behavioral;
