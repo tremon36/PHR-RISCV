@@ -3,7 +3,7 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.numeric_std.all;
-use IEEE.std_logic_unsigned.all;
+use IEEE.std_logic_signed.all;
 
 entity EXE is
   Port (op1,op2 : in std_logic_vector (31 downto 0);-- in case inmediate intruction, the inmediate op gets fech into the op2.
@@ -13,6 +13,7 @@ entity EXE is
         op_code : in std_logic_vector (6 downto 0);
         clk : in std_logic;
         reset, stall_in : in std_logic;
+        Instructio_pointer : in std_logic_vector (31 downto 0);
         stall_out : out std_logic;
         z : out std_logic_vector (90 downto 0)
         );
@@ -79,11 +80,10 @@ begin
             if ( stall_in = '0')then
                 case op_code is
                 when "0110111" => z_alu  <= op2;                            --LUI
-                when "0010111" => z_alu <= op1;                             --AUIPC Add Upper Imm to PC
-                when "0000011" => z_alu <= op1 ;                            --LB, LH, LW, LBU, LHU  Ricardo se tiene que acordar de hacer un resize de los inmediatos.
-    --                case sub_op_code is 
-    --                when "000" => z_alu <= op2; 
-    --                end case;
+                when "0010111" => z_alu <= op1 + Instructio_pointer;        --AUIPC                            --AUIPC Add Upper Imm to PC
+                when "1101111" => z_alu <= Instructio_pointer + x"0000004"; --JAL      
+                When "1100111" => z_alu <= Instructio_pointer + x"0000004"; --JALR
+                when "0000011" => z_alu <= op1  + std_logic_vector(resize(signed(ofsset), 32));   --LB, LH, LW, LBU, LHU  Ricardo se tiene que acordar de hacer un resize de los inmediatos.   
                 when "0010011" =>
                     case sub_op_code is 
                         when "000" => z_alu <= op1 + op2;                       --ADDI
@@ -122,12 +122,15 @@ begin
                             l_r <= '0';
                             s_u <= '0';
                                        
-                        when "101" =>                                        --SRLI & SRAI !!!!!! NO se pueden diferenciar con el op_code y el sub_opcode
+                        when "101" =>                                        --SRLI & SRAI 
                             l_r <= '1';
-                            if(ofsset (0) = '0')then  s_u <= '0';
+                            if(ofsset (5) = '0')then  s_u <= '0';
                             else s_u <= '1';
                             end if;          
-                        when "000" => z_alu <= op1 + op2;                       --ADD & SUB !!!!!! NO se pueden diferenciar con el op_code y el sub_opcode
+                        when "000" =>                                        --ADD & SUB 
+                            if(ofsset (5) = '0')then  z_alu <= op1 + op2;
+                            else z_alu <= op1 - op2;
+                            end if;
                         when "010"  =>                                         --SLT
                             if (op1(31) = '1')then
                                 if(op2(31) = '1')then                     --los dos son neativos.
