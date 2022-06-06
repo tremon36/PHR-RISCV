@@ -21,6 +21,7 @@ architecture Behavioral of MEMORY is
  
 begin
 
+stall_prev <= '0';
 OPCODE <= decoded_instruction(6 downto 0);
 SUBOPCODE <= decoded_instruction(9 downto 7);
 
@@ -45,7 +46,7 @@ process(clk,reset)
                 instruction_z<= decoded_instruction;
                 memory_dir<=decoded_instruction(58 downto 27);
                 case SUBOPCODE is 
-                    when "000" => memory_to_write<= x"000000"&decoded_instruction(67 downto 59);
+                    when "000" => memory_to_write<= x"000000"&decoded_instruction(66 downto 59);
                     bytes<="00";
                     when "001" =>memory_to_write<=x"0000"&decoded_instruction(74 downto 59);
                     bytes<="01";

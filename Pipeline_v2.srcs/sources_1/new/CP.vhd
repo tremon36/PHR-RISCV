@@ -22,7 +22,7 @@ current_num <= num1;
         if (clock = '1' and clock'event)then 
             if(reset = '1') then num1 <= X"00000000";
             else if(enable_parallel_load = '1') then num1 <= load;
-            else if(count = '1' ) then num1 <= num1 + "100000";
+            else if(count = '1' ) then num1 <= num1 + "100";
                  end if;
                  end if;
             end if;
